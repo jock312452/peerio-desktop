@@ -52,9 +52,9 @@ interface DesktopConfig extends Config {
         feedbackUser: string;
     };
     beacons: {
-        dmCountPinPrompt: string;
-        fileCountFolderPrompt: string;
-        messageCountSharePrompt: string;
+        dmCountPinPrompt: number;
+        fileCountFolderPrompt: number;
+        messageCountSharePrompt: number;
     };
 }
 
