@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import css from 'classnames';
 
 import { Button, CustomIcon, Dialog, MaterialIcon, ProgressBar, Tooltip } from 'peer-ui';
-import { chatStore, chatInviteStore, t } from 'peerio-icebear';
+import { chatStore, chatInviteStore, fileStore, t } from 'peerio-icebear';
 import { Contact } from 'peerio-icebear/dist/models';
 
 import config from '~/config';
@@ -44,7 +44,7 @@ export default class ChatView extends React.Component {
                 }
             ),
             when(
-                () => chatStore.activeChat.recentFiles.length > 0,
+                () => chatStore.activeChat.recentFiles.length === 1 && fileStore.files.length === 1,
                 () => {
                     beaconStore.addBeacons('infoPanel_desktop');
                 }
