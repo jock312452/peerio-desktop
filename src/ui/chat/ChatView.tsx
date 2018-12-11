@@ -61,7 +61,10 @@ export default class ChatView extends React.Component {
             beaconStore.addBeacons('startChat');
         }
 
-        if (chatStore.directMessages.length > config.beacons.dmCountPinPrompt) {
+        if (
+            !chatStore.myChats.favorites.length &&
+            chatStore.directMessages.length > config.beacons.dmCountPinPrompt
+        ) {
             beaconStore.addBeacons('pin_desktop');
         }
     }
