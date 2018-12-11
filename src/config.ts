@@ -51,7 +51,11 @@ interface DesktopConfig extends Config {
         supportEmail: string;
         feedbackUser: string;
     };
-    beacons: { [key: string]: string };
+    beacons: {
+        dmCountPinPrompt: string;
+        fileCountFolderPrompt: string;
+        messageCountSharePrompt: string;
+    };
 }
 
 const cfg = config as DesktopConfig;
