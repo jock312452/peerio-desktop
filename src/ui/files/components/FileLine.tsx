@@ -134,11 +134,9 @@ export default class FileLine extends React.Component<FileLineProps> {
         return children;
     };
 
-    @observable
     fileActionsMenuRef = React.createRef<Menu>();
 
     onFileActionsBeaconClick = () => {
-        console.log(this.fileActionsMenuRef);
         this.fileActionsMenuRef.current.handleMenuClick();
     };
 
