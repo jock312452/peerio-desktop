@@ -44,7 +44,10 @@ export default class ChatView extends React.Component {
                 }
             ),
             when(
-                () => chatStore.activeChat.recentFiles.length === 1 && fileStore.files.length === 1,
+                () =>
+                    chatStore.activeChat &&
+                    chatStore.activeChat.recentFiles.length === 1 &&
+                    fileStore.files.length === 1,
                 () => {
                     beaconStore.addBeacons('infoPanel_desktop');
                 }
@@ -62,7 +65,7 @@ export default class ChatView extends React.Component {
         }
 
         if (
-            !chatStore.myChats.favorites.length &&
+            chatStore.myChats.favorites.length === 0 &&
             chatStore.directMessages.length > config.beacons.dmCountPinPrompt
         ) {
             beaconStore.addBeacons('pin_desktop');
