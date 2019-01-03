@@ -70,11 +70,6 @@ export default class Files extends React.Component<FilesProps> {
     }
 
     componentWillMount() {
-        clientApp.isInFilesView = true;
-        if (uiStore.openedFolder) {
-            setCurrentFolder(uiStore.openedFolder);
-        }
-
         this.disposers = [
             reaction(
                 () => fileStore.folderStore.currentFolder,
@@ -131,7 +126,6 @@ export default class Files extends React.Component<FilesProps> {
     }
 
     componentWillUnmount() {
-        uiStore.openedFolder = fileStore.folderStore.currentFolder;
         clientApp.isInFilesView = false;
         window.removeEventListener('resize', this.enqueueCheck);
         fileStore.searchQuery = '';
