@@ -130,7 +130,6 @@ export default class Files extends React.Component<FilesProps> {
         window.removeEventListener('resize', this.enqueueCheck);
         fileStore.searchQuery = '';
         fileStore.clearSelection();
-
         // remove icebear hook for sharing selection
         fileStore.bulk.shareWithSelector = null;
         // remove icebear hook for deletion
