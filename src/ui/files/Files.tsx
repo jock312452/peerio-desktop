@@ -13,6 +13,7 @@ import T from '~/ui/shared-components/T';
 import ConfirmFolderDeleteDialog from '~/ui/shared-components/ConfirmFolderDeleteDialog';
 import uiStore from '~/stores/ui-store';
 import beaconStore from '~/stores/beacon-store';
+import { setCurrentFolder } from '~/ui/files/helpers/sharedFileAndFolderActions';
 
 import { selectDownloadFolder, pickSavePath } from '~/helpers/file';
 
@@ -70,6 +71,10 @@ export default class Files extends React.Component<FilesProps> {
 
     componentWillMount() {
         clientApp.isInFilesView = true;
+        if (uiStore.openedFolder) {
+            setCurrentFolder(uiStore.openedFolder);
+        }
+
         this.disposers = [
             reaction(
                 () => fileStore.folderStore.currentFolder,
@@ -126,10 +131,12 @@ export default class Files extends React.Component<FilesProps> {
     }
 
     componentWillUnmount() {
+        uiStore.openedFolder = fileStore.folderStore.currentFolder;
         clientApp.isInFilesView = false;
         window.removeEventListener('resize', this.enqueueCheck);
         fileStore.searchQuery = '';
         fileStore.clearSelection();
+
         // remove icebear hook for sharing selection
         fileStore.bulk.shareWithSelector = null;
         // remove icebear hook for deletion

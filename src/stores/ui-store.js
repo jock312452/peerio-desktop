@@ -19,6 +19,9 @@ class UIStore {
     // Message object to show in sidebar when clicking on receipts
     @observable selectedMessage;
 
+    // Remember the folder that user had open in Files tab, reopen when they go back
+    @observable openedFolder;
+
     // Controls the banner/warning about file migration deprecation and removal of pending files
     // all this will get deleted soon, as soon as migration is deprecated
     @observable pendingFilesBannerVisible = false;
