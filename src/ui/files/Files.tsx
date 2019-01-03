@@ -13,7 +13,6 @@ import T from '~/ui/shared-components/T';
 import ConfirmFolderDeleteDialog from '~/ui/shared-components/ConfirmFolderDeleteDialog';
 import uiStore from '~/stores/ui-store';
 import beaconStore from '~/stores/beacon-store';
-import { setCurrentFolder } from '~/ui/files/helpers/sharedFileAndFolderActions';
 
 import { selectDownloadFolder, pickSavePath } from '~/helpers/file';
 
@@ -70,6 +69,7 @@ export default class Files extends React.Component<FilesProps> {
     }
 
     componentWillMount() {
+        clientApp.isInFilesView = true;
         this.disposers = [
             reaction(
                 () => fileStore.folderStore.currentFolder,
