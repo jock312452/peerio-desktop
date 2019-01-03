@@ -460,6 +460,7 @@ export default class CreateAccount extends React.Component<SignupStep> {
 
                         <div className="buttons-container">
                             <Button
+                                testId="button_next"
                                 className="advance-button"
                                 onClick={this.advanceStep}
                                 theme="affirmative"

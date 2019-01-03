@@ -6,13 +6,14 @@
   display: flex;
   flex-direction: column;
   max-width: 100%;
+  padding-bottom: 0;
 
   .sidebar-file-container {
     position: relative;
-    height: 80px;
+    height: 60px;
 
     .left {
-      min-width: 48px;
+      margin-right: $margin-small;
     }
 
     .content {
@@ -40,8 +41,7 @@
         margin-right: auto;
       }
 
-      .file-shared-by,
-      .file-shared-date {
+      .file-shared-by {
         color: $text-dark-hint;
       }
     }
@@ -50,15 +50,9 @@
       margin-left: $margin-small;
     }
 
-    // Partial border-bottom
-    &:not(:last-of-type)::after {
-      content: ' ';
-      position: absolute;
-      height: 1px;
-      width: calc(100% - 80px); // full width - 48px icon width - 2x $margin-default
-      right: 0;
-      bottom: 0;
-      background-color: $divider-dark;
+    // Entire list has bottom border, so make sure the border doesn't apply to last item
+    &:not(:last-of-type) {
+      border-bottom: 1px solid $divider-dark;
     }
   }
 }

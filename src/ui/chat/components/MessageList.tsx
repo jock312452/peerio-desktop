@@ -292,6 +292,7 @@ export default class MessageList extends React.Component {
                 className="messages-current scrollable"
                 onScroll={this.handleScroll}
                 ref={this.containerRef}
+                data-test-id="messageList"
             >
                 {this.renderChatStart()}
                 {chatStore.activeChat.loadingInitialPage ? (

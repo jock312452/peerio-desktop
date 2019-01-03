@@ -20,6 +20,7 @@ export default class Snackbar extends WarningDisplayBase<SnackbarProps> {
         const w = warnings.current;
         return (
             <div
+                data-test-id="snackbar"
                 className={css(this.props.className, 'snackbar-wrapper', {
                     show: this.isVisible
                 })}

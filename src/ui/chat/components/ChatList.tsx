@@ -317,7 +317,11 @@ export default class ChatList extends React.Component {
                         <MaintenanceWarning />
                         <List>
                             <div>
-                                <PlusIcon onClick={this.newChannel} label={t('title_channels')} />
+                                <PlusIcon
+                                    onClick={this.newChannel}
+                                    label={t('title_channels')}
+                                    testId="chatList_newRoom"
+                                />
                                 <Tooltip text={t('title_addRoom')} position="right" />
                             </div>
 
@@ -351,6 +355,7 @@ export default class ChatList extends React.Component {
                                     <PlusIcon
                                         label={t('title_directMessages')}
                                         onClick={this.newMessage}
+                                        testId="chatList_newDm"
                                     />
                                 </Beacon>
                                 <Tooltip text={t('title_addDirectMessage')} position="right" />

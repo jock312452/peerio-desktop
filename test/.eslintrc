@@ -1,0 +1,13 @@
+{
+    "rules": {
+        "rules": {
+            "no-unused-expressions": 0,
+            "prefer-arrow-callback": 0
+        },
+        "globals": {
+            "beforeEach": false,
+            "afterEach": false,
+            "setupTimeout": false
+        }
+    }
+}

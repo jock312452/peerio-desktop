@@ -18,7 +18,7 @@ declare global {
     }
 }
 
-if (process.env.NODE_ENV !== 'development') {
+if (process.env.NODE_ENV !== 'development' && process.env.NODE_ENV !== 'test') {
     process.env.NODE_ENV = 'production';
 }
 
@@ -35,12 +35,11 @@ require('~/config');
 
 if (isDevEnv) {
     // to allow require of development modules in dev environment
-    const path = require('path');
-    const PATH_APP_NODE_MODULES = path.resolve(path.join('node_modules'));
-    require('module').globalPaths.push(PATH_APP_NODE_MODULES);
+    // const path = require('path');
+    // const PATH_APP_NODE_MODULES = path.resolve(path.join('node_modules'));
+    // require('module').globalPaths.push(PATH_APP_NODE_MODULES);
     // enable react-perf chrome dev tool
     // window.Perf = require('react-addons-perf');
-
     // enable shortcuts for recording tests
     // window.recordUI = require('~/helpers/test-recorder').recordUI;
     // window.stopRecording = require('~/helpers/test-recorder').stopRecording;

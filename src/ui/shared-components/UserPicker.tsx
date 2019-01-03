@@ -377,6 +377,7 @@ export default class UserPicker extends React.Component<UserPickerProps> {
                                                       </Chip>
                                                   ))}
                                             <SearchInput
+                                                testId="input_userSearch"
                                                 placeholder={
                                                     this.selected.length
                                                         ? null
@@ -406,6 +407,7 @@ export default class UserPicker extends React.Component<UserPickerProps> {
                                                             this.selected.length === 0)
                                                     }
                                                     theme="affirmative"
+                                                    testId="button_createDm"
                                                 />
                                             )}
                                         {(this.contactLoading || this._searchUsernameTimeout) && (
@@ -429,6 +431,7 @@ export default class UserPicker extends React.Component<UserPickerProps> {
                                         onClick={this.props.onAccept as any}
                                         disabled={this.props.noSubmit}
                                         theme="affirmative"
+                                        testId="button_createRoom"
                                     />
                                 </div>
                             )}
@@ -508,6 +511,7 @@ class ListContact extends React.Component<ListContactProps> {
                 caption={contact.fullName}
                 legend={contact.username}
                 onClick={this.onClick}
+                data-test-id={`listItem_${contact.username}`}
             />
         );
     }

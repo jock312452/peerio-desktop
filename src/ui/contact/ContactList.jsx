@@ -88,6 +88,7 @@ class ContactList extends React.Component {
                         placeholder={t('title_findAContact')}
                         value={contactStore.uiViewSearchQuery}
                         onChange={this.handleSearchQueryChange}
+                        testId="input_contactSearch"
                     />
                 </div>
 
@@ -115,6 +116,7 @@ class ContactList extends React.Component {
                                             legend={c.username}
                                             caption={`${c.firstName} ${c.lastName}`}
                                             rightContent={this.contactActions(c)}
+                                            data-test-id={`listItem_${c.username}`}
                                         />
                                     ))}
                                 </List>

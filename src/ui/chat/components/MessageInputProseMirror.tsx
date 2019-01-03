@@ -341,6 +341,7 @@ export default class MessageInputProseMirror extends React.Component<{
                         className="message-editor-container-prosemirror"
                         onBlur={this.onInputBlur}
                         ref={this.mountProseMirror}
+                        data-test-id="messageInputContainer"
                     />
                     <Toolbar.Component>
                         <BoldButton.Component />

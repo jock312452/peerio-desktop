@@ -191,6 +191,7 @@ export default class ValidatedInput extends Component {
                 })}
             >
                 <Input
+                    testId={this.props.name}
                     type={this.props.type || 'text'}
                     value={this.props.store[this.props.name] || ''}
                     label={this.props.label}

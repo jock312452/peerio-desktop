@@ -26,21 +26,10 @@
     @extend %flex-row;
     @extend %flex-shrink-0;
     @extend %flex-align-center;
-    height: 80px;
-    border-bottom: 1px solid $divider-dark;
+    height: 96px;
 
-    .material-icons {
-      margin-top: -24px;
-      font-size: 48px;
-    }
-
-    .p-input {
-      margin-left: $margin-small;
-
-      input {
-        padding-left: 64px;
-        border: 0;
-      }
+    .p-search-input {
+      margin: $margin-large;
     }
   }
 

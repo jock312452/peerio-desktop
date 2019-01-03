@@ -229,7 +229,11 @@ export default class Login extends Component {
                             this.loginStore.lastAuthenticatedUser.username,
                         switchUser: text => {
                             return (
-                                <a className="clickable" onClick={this.unsetLastUser}>
+                                <a
+                                    data-test-id="switchUser"
+                                    className="clickable"
+                                    onClick={this.unsetLastUser}
+                                >
                                     {text}
                                 </a>
                             );
@@ -343,6 +347,7 @@ export default class Login extends Component {
                                 onClick={this.onLoginClick}
                                 disabled={this.loginStore.hasErrors}
                                 theme="affirmative"
+                                testId="button_signIn"
                             />
                         </div>
 

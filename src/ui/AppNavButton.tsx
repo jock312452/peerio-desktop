@@ -10,6 +10,7 @@ export interface AppNavButtonProps {
     icon: string;
     showBadge?: boolean;
     className?: string;
+    testId?: string;
 }
 
 @observer
@@ -24,6 +25,7 @@ export default class AppNavButton extends React.Component<AppNavButtonProps> {
                     tooltip={this.props.tooltip}
                     tooltipPosition="right"
                     icon={this.props.icon}
+                    testId={this.props.testId}
                 />
                 <div className={this.props.showBadge ? 'look-at-me' : 'banish'} />
             </div>

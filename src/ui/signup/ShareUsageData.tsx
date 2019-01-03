@@ -40,6 +40,7 @@ export default class ShareUsageData extends React.Component<SignupStep> {
                     <div className="buttons-container">
                         <Button onClick={this.decline} label={t('button_notNow')} />
                         <Button
+                            testId="button_share"
                             onClick={this.accept}
                             theme="affirmative"
                             label={t('button_share')}

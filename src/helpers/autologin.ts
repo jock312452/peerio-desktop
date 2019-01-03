@@ -24,7 +24,8 @@ function _setAutologin(enabled: boolean): void {
                 }
                 User.current.autologinEnabled = true;
             })
-            .catch(() => {
+            .catch(err => {
+                console.error(err);
                 User.current.autologinEnabled = false;
                 warnings.addSevere('title_autologinSetFail');
             });

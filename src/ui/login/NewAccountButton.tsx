@@ -9,7 +9,7 @@ export default class NewAccountButton extends React.Component<{
 }> {
     render() {
         return (
-            <Button theme="affirmative" onClick={this.props.onClick}>
+            <Button testId="signup" theme="affirmative" onClick={this.props.onClick}>
                 {t('button_CreateAccount')}
             </Button>
         );

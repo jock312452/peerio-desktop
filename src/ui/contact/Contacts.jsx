@@ -56,6 +56,7 @@ class Contacts extends React.Component {
                                 })`}
                                 className={css({ active: isAddedActive })}
                                 onClick={this.toAdded}
+                                data-test-id="favoriteContacts"
                             />
                             <ListItem
                                 leftIcon="people"
@@ -64,6 +65,7 @@ class Contacts extends React.Component {
                                 })`}
                                 className={css({ active: isAllActive })}
                                 onClick={this.toAll}
+                                data-test-id="allContacts"
                             />
                             <ListItem
                                 leftIcon="person_add"
@@ -72,6 +74,7 @@ class Contacts extends React.Component {
                                 })`}
                                 className={css({ active: isInvitedActive })}
                                 onClick={this.toInvited}
+                                data-test-id="invitedContacts"
                             />
                         </List>
                     </div>
