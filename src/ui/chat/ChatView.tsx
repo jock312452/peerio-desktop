@@ -51,6 +51,15 @@ export default class ChatView extends React.Component {
                 () => {
                     beaconStore.addBeacons('infoPanel_desktop');
                 }
+            ),
+
+            // Mark 'pin_desktop' beacon read if user ever pins a chat.
+            // Beacon will not show if user unpins all chats and goes back to 0 fav.
+            when(
+                () => chatStore.activeChat && chatStore.myChats.favorites.length > 0,
+                () => {
+                    beaconStore.markAsRead('pin_desktop');
+                }
             )
         ];
 
