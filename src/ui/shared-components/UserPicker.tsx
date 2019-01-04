@@ -31,7 +31,7 @@ import UserSearchError from '~/whitelabel/components/UserSearchError';
 
 interface UserPickerProps {
     title: string;
-    description?: string;
+    description?: string | JSX.Element | JSX.Element[];
     limit?: number;
     /**
      * If this is a room creation user picker, which is based on some global
