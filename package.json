@@ -132,7 +132,7 @@
     "normalize.css": "8.0.1",
     "peer-ui": "github:PeerioTechnologies/ui-library#v5.2.0",
     "peerio-copy": "github:PeerioTechnologies/peerio-copy#icebear",
-    "peerio-icebear": "github:PeerioTechnologies/peerio-icebear#dev",
+    "peerio-icebear": "github:PeerioTechnologies/peerio-icebear#typescript-continued",
     "prosemirror-commands": "1.0.7",
     "prosemirror-dropcursor": "1.0.1",
     "prosemirror-gapcursor": "1.0.2",
