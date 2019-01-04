@@ -41,10 +41,10 @@ interface UserPickerProps {
      * the render method below.
      */
     onAccept: (contacts: Contact[]) => void;
-    onClose: () => void;
+    onClose?: () => void;
     onChange?: (contacts: Contact[]) => void;
     isDM?: boolean;
-    context: 'newchat';
+    context?: 'newchat';
     sharing?: boolean;
     onlyPick?: boolean;
     closeable?: boolean;

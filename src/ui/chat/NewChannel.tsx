@@ -12,9 +12,9 @@ class NewChannel extends React.Component {
     @observable channelName = '';
     @observable purpose = '';
 
-    componentDidMount() {
-        if (this.isLimitReached) this.upgradeDialog.show();
-    }
+    // componentDidMount() {
+    //     if (this.isLimitReached) this.upgradeDialog.show();
+    // }
 
     get isLimitReached() {
         return User.current.channelsLeft === 0;
@@ -23,7 +23,7 @@ class NewChannel extends React.Component {
     handleAccept = async () => {
         this.waiting = true;
         const chat = await chatStore.startChat(
-            this.userPicker.selected,
+            this.userPickerRef.current.selected,
             true,
             this.channelName,
             this.purpose
@@ -52,13 +52,11 @@ class NewChannel extends React.Component {
         this.purpose = val;
     };
 
-    setUserPickerRef = ref => {
-        this.userPicker = ref;
-    };
+    userPickerRef = React.createRef<UserPicker>();
 
-    setUpgradeDialogRef = ref => {
-        this.upgradeDialog = ref;
-    };
+    // setUpgradeDialogRef = ref => {
+    //     this.upgradeDialog = ref;
+    // };
 
     render() {
         const textParser = {
@@ -116,7 +114,7 @@ class NewChannel extends React.Component {
                     </div>
                     <div className="user-picker-container">
                         <UserPicker
-                            ref={this.setUserPickerRef}
+                            ref={this.userPickerRef}
                             title={t('title_chatWith')}
                             noHeader
                             onlyPick
