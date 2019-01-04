@@ -27,7 +27,8 @@ export function isUrlAllowed(url: string): boolean {
 const urlMatcher = new UrlMatcher({
     tagBuilder: {}, // We can pass a dummy tagBuilder as long as we're not actually generating <a> tags
     stripPrefix: false,
-    stripTrailingSlash: false
+    stripTrailingSlash: false,
+    decodePercentEncoding: false
 });
 const emailMatcher = new EmailMatcher({ tagBuilder: {} });
 

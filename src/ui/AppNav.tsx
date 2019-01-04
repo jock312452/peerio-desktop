@@ -270,6 +270,7 @@ export default class AppNav extends React.Component {
                         }
                         showBadge={chatStore.badgeCount > 0}
                         onClick={this.toChats}
+                        testId="button_goToChat"
                     />
                     <AppNavBeaconedItem
                         beaconName="files"
@@ -277,6 +278,7 @@ export default class AppNav extends React.Component {
                         icon="folder"
                         active={currentRoute.startsWith(ROUTES.files)}
                         onClick={this.toFiles}
+                        testId="button_goToFiles"
                     />
                     <AppNavBeaconedItem
                         beaconName="contact"
@@ -284,6 +286,7 @@ export default class AppNav extends React.Component {
                         icon="people"
                         active={currentRoute.startsWith(ROUTES.contacts)}
                         onClick={this.toContacts}
+                        testId="button_goToContacts"
                     />
                     <UsageCloud onClick={this.toOnboarding} />
                 </div>

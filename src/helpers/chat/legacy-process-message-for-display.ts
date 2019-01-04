@@ -64,7 +64,8 @@ const autolinker = new Autolinker({
     newWindow: false,
     truncate: 0,
     className: '',
-    stripTrailingSlash: false
+    stripTrailingSlash: false,
+    decodePercentEncoding: false
 });
 
 /**

@@ -7,6 +7,7 @@ import { contactStore, User, warnings, t } from 'peerio-icebear';
 import { Button, SearchInput, ProgressBar } from 'peer-ui';
 
 import T from '~/ui/shared-components/T';
+import BackgroundIllustration from '~/ui/shared-components/BackgroundIllustration';
 import UserSearchError from '~/whitelabel/components/UserSearchError';
 import config from '~/config';
 import uiStore from '~/stores/ui-store';
@@ -233,12 +234,12 @@ export default class NewContact extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="image-container">
-                    <img
-                        src="./static/img/illustrations/contacts-add-invite.svg"
-                        draggable={false}
-                    />
-                </div>
+                <BackgroundIllustration
+                    src="./static/img/illustrations/contacts-add-invite.svg"
+                    height={464}
+                    width={496}
+                    distance={24}
+                />
             </div>
         );
     }

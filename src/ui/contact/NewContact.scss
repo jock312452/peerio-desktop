@@ -71,23 +71,4 @@
       }
     }
   }
-
-  .image-container {
-    flex-shrink: 0;
-    position: relative;
-    height: 88px;
-    width: 100%;
-    background-color: $background-hover-default;
-    border-top: 0.5px solid #363c66;
-
-    img {
-      position: absolute;
-      height: 464px;
-      width: 496px;
-      left: 0;
-      right: 0;
-      bottom: 24px;
-      margin: 0 auto;
-    }
-  }
 }

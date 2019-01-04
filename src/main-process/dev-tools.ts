@@ -22,14 +22,14 @@ if (isDevEnv) {
 }
 
 export function onAppReady(mainWindow: BrowserWindow): void {
-    if (!isDevEnv) return;
+    if (!isDevEnv || process.env.NO_DEV_TOOLS) return;
     if (process.env.REMOTE_DEBUG_PORT === undefined) {
         mainWindow.webContents.openDevTools();
     }
 }
 
 export function installExtensions(): Promise<void> {
-    if (!isDevEnv) return Promise.resolve();
+    if (!isDevEnv || process.env.NO_DEV_TOOLS) return Promise.resolve();
     console.log('installing extensions.');
     const devtron = require('devtron');
     devtron.install();

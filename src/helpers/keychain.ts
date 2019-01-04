@@ -26,7 +26,8 @@ export async function saveSecret(username: string, passphrase: string): Promise<
         await keytar.setPassword(service, username, passphrase);
         return true;
     } catch (err) {
-        console.error('Error setting passphrase with keytar', err);
+        console.error('Error setting passphrase with keytar');
+        console.error(err);
         return false;
     }
 }

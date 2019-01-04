@@ -52,7 +52,11 @@ export default class NewUser extends React.Component<NewUserProps> {
 
                         <div className="buttons-container">
                             <NewAccountButton onClick={this.goToSignup} />
-                            <Button theme="affirmative secondary" onClick={this.goToLogin}>
+                            <Button
+                                testId="button_login"
+                                theme="affirmative secondary"
+                                onClick={this.goToLogin}
+                            >
                                 {t('button_login')}
                             </Button>
                         </div>

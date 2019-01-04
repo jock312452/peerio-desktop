@@ -1,10 +1,9 @@
 import React from 'react';
 import { action } from 'mobx';
 import { observer } from 'mobx-react';
-import moment from 'moment';
 
 import { List, ListItem, Menu, MenuItem } from 'peer-ui';
-import { chatStore, fileStore, t } from 'peerio-icebear';
+import { chatStore, contactStore, fileStore, t, User } from 'peerio-icebear';
 import { File } from 'peerio-icebear/dist/models';
 
 import T from '~/ui/shared-components/T';
@@ -93,13 +92,18 @@ export default class FilesSection extends React.Component<FilesSectionProps> {
     }
 
     readonly renderFileItem = (file: File) => {
+        const fileOwnerFullName =
+            file.fileOwner === User.current.username
+                ? t('title_you')
+                : contactStore.getContact(file.fileOwner).fullName;
+
         return (
             <ListItem
                 key={file.fileId}
                 data-fileid={file.fileId}
                 className="sidebar-file-container"
                 onClick={this.download}
-                leftContent={<FileSpriteIcon type={file.iconType} size="large" />}
+                leftContent={<FileSpriteIcon type={file.iconType} size="medium" />}
                 rightContent={this.menu(file)}
             >
                 <div className="meta">
@@ -107,14 +111,7 @@ export default class FilesSection extends React.Component<FilesSectionProps> {
                         <span className="file-name">{file.nameWithoutExtension}</span>
                         <span className="file-ext">.{file.ext}</span>
                     </div>
-                    <div className="file-shared-by">{file.fileOwner}</div>
-                    <div className="file-shared-date">
-                        {moment(file.kegCreatedAt).format(
-                            Date.now() - file.kegCreatedAt > 24 * 60 * 60 * 1000
-                                ? 'll'
-                                : 'll [|] h:mmA'
-                        )}
-                    </div>
+                    <div className="file-shared-by">{fileOwnerFullName}</div>
                 </div>
             </ListItem>
         );

@@ -238,7 +238,7 @@ class Profile extends React.Component {
                 <div className="avatar-card">
                     <div className="card-header">
                         <div className="full-name">{this.contact.fullName}</div>
-                        <div className="username">@{this.contact.username}</div>
+                        <div className="username">{this.contact.username}</div>
                     </div>
                     <Avatar contact={this.contact} size="full" />
                     <div className="card-footer">

@@ -135,6 +135,13 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      .username {
+        margin-left: $margin-small;
+        font-style: italic;
+        font-weight: $font-weight-regular;
+        color: $text-dark-secondary;
+      }
     }
 
     // styling for edit icon in title bar thing.
@@ -171,10 +178,9 @@
       @extend %flex-row;
       @extend %flex-align-center;
       height: 20px;
-      margin-left: -12px;
 
       .material-icons {
-        padding: $padding-small;
+        padding-right: $padding-small;
       }
     }
   }

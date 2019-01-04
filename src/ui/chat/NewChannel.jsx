@@ -99,6 +99,7 @@ class NewChannel extends React.Component {
                             size="small"
                             autoFocus
                             noHelperText
+                            testId="input_roomName"
                         />
                         <div className="helper-text" />
                     </div>

@@ -1,9 +1,10 @@
 import React from 'react';
 import { observable, when } from 'mobx';
 import { observer } from 'mobx-react';
-import { chatStore, t } from 'peerio-icebear';
+import { chatStore, contactStore, t } from 'peerio-icebear';
 import UserPicker from '~/ui/shared-components/UserPicker';
 import FullCoverLoader from '~/ui/shared-components/FullCoverLoader';
+import BackgroundIllustration from '~/ui/shared-components/BackgroundIllustration';
 import ELEMENTS from '~/whitelabel/helpers/elements';
 
 @observer
@@ -54,6 +55,14 @@ class NewChat extends React.Component {
                     />
                 </div>
                 <FullCoverLoader show={this.waiting} />
+                {contactStore.contacts.length === 0 ? (
+                    <BackgroundIllustration
+                        src="./static/img/illustrations/dm-start.svg"
+                        height={320}
+                        width={538}
+                        distance={32}
+                    />
+                ) : null}
             </div>
         );
     }

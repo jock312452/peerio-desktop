@@ -4,8 +4,9 @@ $userlist-maxwidth: 608px; // $userpicker-maxwidth - $userpicker-margin-large
 
 .user-picker {
   @extend %flex-row;
-  height: 100vh;
+  flex-grow: 1;
   width: 100%;
+  max-height: 100vh;
   background: $background-root;
 
   .selected-items {

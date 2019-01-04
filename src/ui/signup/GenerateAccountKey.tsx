@@ -162,6 +162,7 @@ export default class GenerateAccountKey extends React.Component<SignupStep> {
                                     {this.keyReady ? this.akDisplay : this.loadingAnimation}
                                 </div>
                                 <Button
+                                    testId="button_copy"
                                     className={css({ hide: !this.keyReady })}
                                     onClick={this.akCopy}
                                     disabled={!this.keyReady}
@@ -173,6 +174,7 @@ export default class GenerateAccountKey extends React.Component<SignupStep> {
                                     <T k="title_akBackupDescription" tag="p" className="fade-0" />
                                     {this.akPreview}
                                     <Button
+                                        testId="button_next"
                                         className="skip-backup fade-2"
                                         onClick={this.advanceStep}
                                     >

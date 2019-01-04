@@ -331,6 +331,7 @@ export default class TermsOfUse extends React.Component<SignupStep> {
                         <div className="buttons-container">
                             <Button onClick={this.declineTerms} label={t('button_decline')} />
                             <Button
+                                testId="button_accept"
                                 onClick={this.acceptTerms}
                                 theme="affirmative"
                                 label={t('button_accept')}

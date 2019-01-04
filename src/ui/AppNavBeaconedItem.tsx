@@ -10,6 +10,7 @@ import AppNavButton, { AppNavButtonProps } from './AppNavButton';
 
 interface AppNavBeaconedItemProps extends AppNavButtonProps {
     beaconName: string;
+    testId?: string;
 }
 
 @observer

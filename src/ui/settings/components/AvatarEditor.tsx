@@ -2,7 +2,7 @@ import React from 'react';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { remote as electron } from 'electron';
-import Croppie from 'croppie';
+import { Croppie } from 'croppie';
 
 import { t } from 'peerio-icebear';
 import { Button } from 'peer-ui';

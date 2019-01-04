@@ -3,31 +3,42 @@
 version: 2
 jobs:
     build:
-        docker:
-            - image: circleci/node:9.8
+        macos:
+            xcode: 10.1.0
+        #   docker:
+        #     - image: circleci/node:10.2
         working_directory: ~/repo
         steps:
             - checkout
-            #
-            # - run:
-            #     name: "Update npm"
-            #     command: |
-            #       npm install npm@latest
-            #       sudo rm -rf /usr/local/lib/node_modules/npm
-            #       sudo mv node_modules/npm /usr/local/lib/node_modules/npm
-            #       sudo chown -R 500:500 /usr/local/lib/node_modules/npm
             - run:
                   name: 'Checking Versions'
                   command: |
                       node --version
                       npm --version
             - restore_cache:
-                  key: dependency-cache-{{ checksum "package.json" }}-
+                  key: dependency-cache-v2-{{ checksum "package.json" }}-
+            - run:
+                  name: create and set the default keychain
+                  command: |
+                      security create-keychain -p "" temporary
+                      security default-keychain -s temporary
+                      security set-keychain-settings -t 36000
+                      security unlock-keychain -p "" temporary
+            - run: export {no_proxy,NO_PROXY}="127.0.0.1,localhost"
+            #- run: sudo apt-get update
+            # Install display server dependencies
+            #- run: sudo apt install xvfb libxtst6 libxss1 libgtk2.0-0 -y
+            # Install core libraries for chromium driver
+            #- run: sudo apt install libnss3 libasound2 libgconf-2-4 -y
             - run:
                   name: install-dependencies
                   command: npm install
             - save_cache:
-                  key: dependency-cache-{{ checksum "package.json" }}
+                  key: dependency-cache-v2-{{ checksum "package.json" }}
                   paths:
                       - ./node_modules
             - run: npm test
+            - run: npm run longtest:e2e
+            - store_artifacts:
+                  path: test-results
+                  prefix: test-results

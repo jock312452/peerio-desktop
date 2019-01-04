@@ -1,4 +1,4 @@
-if (process.env.NODE_ENV !== 'development') {
+if (process.env.NODE_ENV !== 'development' && process.env.NODE_ENV !== 'test') {
     process.env.NODE_ENV = 'production';
 }
 
@@ -12,6 +12,7 @@ process.on('uncaughtException', error => {
 });
 
 const isDevEnv = require('~/helpers/is-dev-env').default;
+const isTestEnv = require('~/helpers/is-test-env').default;
 
 if (isDevEnv) {
     // enable source map support in the electron main process. (the render
@@ -103,7 +104,10 @@ if (
 if (isDevEnv) {
     app.setPath(
         'userData',
-        path.resolve(app.getPath('appData'), `${app.getName().toLowerCase()}_dev`)
+        path.resolve(
+            app.getPath('appData'),
+            `${app.getName().toLowerCase()}_${isTestEnv ? '_test' : '_dev'}`
+        )
     );
 }
 
