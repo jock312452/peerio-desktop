@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import { observable, computed, reaction, when, IReactionDisposer } from 'mobx';
+import { observable, computed, reaction, IReactionDisposer } from 'mobx';
 
 import { fileStore, chatStore, t } from 'peerio-icebear';
 import { File, FileFolder } from 'peerio-icebear/dist/models';
