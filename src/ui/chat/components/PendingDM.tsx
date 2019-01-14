@@ -1,4 +1,5 @@
 import React from 'react';
+import { computed } from 'mobx';
 import { observer } from 'mobx-react';
 
 import routerStore from '~/stores/router-store';
@@ -7,27 +8,32 @@ import T from '~/ui/shared-components/T';
 
 import { Button } from 'peer-ui';
 import PendingDMHeader from './PendingDMHeader';
+import { ChatPendingDM } from 'peerio-icebear/dist/models';
 
 @observer
-class PendingDM extends React.Component {
+export default class PendingDM extends React.Component {
+    @computed
+    get activeChat() {
+        return chatStore.activeChat as ChatPendingDM;
+    }
+
     onDismiss() {
         routerStore.navigateTo(routerStore.ROUTES.pendingDMDismissed);
-        chatStore.activeChat.dismiss();
+        this.activeChat.dismiss();
     }
 
     onMessage = () => {
-        chatStore.activeChat.start();
-        if (this.props.onMessage) this.props.onMessage();
+        this.activeChat.start();
     };
 
     render() {
-        if (!chatStore.activeChat) return null;
-        const c = chatStore.activeChat.contact || chatStore.activeChat.otherParticipants[0];
+        if (!this.activeChat) return null;
+        const c = this.activeChat.contact || this.activeChat.otherParticipants[0];
         if (!c) return null;
 
         return (
             <div className="pending-dm">
-                <PendingDMHeader isNewUser={chatStore.activeChat.isReceived} contact={c} />
+                <PendingDMHeader isNewUser={this.activeChat.isReceived} contact={c} />
 
                 <div className="button-container">
                     <Button onClick={this.onDismiss}>
@@ -41,5 +47,3 @@ class PendingDM extends React.Component {
         );
     }
 }
-
-export default PendingDM;

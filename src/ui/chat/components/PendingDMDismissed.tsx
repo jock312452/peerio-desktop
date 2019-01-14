@@ -11,7 +11,7 @@ import EmojiImage from '~/ui/emoji/Image';
 import PlusIcon from '~/ui/shared-components/PlusIcon';
 
 @observer
-class PendingDMDismissed extends React.Component {
+export default class PendingDMDismissed extends React.Component {
     @computed
     get chatListEmpty() {
         // TODO: refactor when SDK is there for chat invites
@@ -41,5 +41,3 @@ class PendingDMDismissed extends React.Component {
         );
     }
 }
-
-export default PendingDMDismissed;
