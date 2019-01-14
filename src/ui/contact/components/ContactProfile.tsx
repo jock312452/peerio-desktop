@@ -1,5 +1,4 @@
 import React from 'react';
-import { action, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import { Avatar, Button, Dialog, ProgressBar } from 'peer-ui';
 import { contactStore, chatStore, t } from 'peerio-icebear';
@@ -23,6 +22,8 @@ const ContactProfileFingerprint = observer(({ contact }) => {
 });
 
 interface ContactProfileProps {
+    active: boolean;
+    onCancel?: () => void;
     contact: Contact;
     onClose?: () => void;
 }
@@ -120,23 +121,13 @@ class ContactProfileBody extends React.Component<ContactProfileProps> {
 
 @observer
 export default class ContactProfile extends React.Component<ContactProfileProps> {
-    @observable dialogVisible;
-    @action.bound
-    openDialog() {
-        this.dialogVisible = true;
-    }
-    @action.bound
-    closeDialog() {
-        this.dialogVisible = false;
-    }
-
     render() {
         return (
             <Dialog
                 title={t('title_settingsProfile')}
-                active={this.dialogVisible}
-                onCancel={this.closeDialog}
-                actions={[{ label: t('button_close'), onClick: this.closeDialog }]}
+                active={this.props.active}
+                onCancel={this.props.onCancel}
+                actions={[{ label: t('button_close'), onClick: this.props.onCancel }]}
             >
                 <ContactProfileBody {...this.props} />
             </Dialog>

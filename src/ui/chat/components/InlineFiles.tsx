@@ -299,38 +299,34 @@ class InlineFile extends React.Component<InlineFileProps> {
         return (
             <div className="inline-files-container">
                 <div className="inline-files">
-                    <div className="inline-files-topbar">
-                        <div className="shared-file">
-                            <div className="container">
-                                <div
-                                    className="clickable file-name-container"
-                                    onClick={this.download}
-                                >
-                                    <div className="file-icon">
-                                        <FileSpriteIcon type={file.iconType} size="small" />
-                                    </div>
-                                    <div className="file-name">{file.nameWithoutExtension}</div>
-                                    <div className="file-ext">.{file.ext}</div>
+                    <div className="shared-file inline-files-topbar">
+                        <div className="container">
+                            <div className="clickable file-name-container" onClick={this.download}>
+                                <div className="file-icon">
+                                    <FileSpriteIcon type={file.iconType} size="small" />
                                 </div>
-                                {file.isImage && uiStore.prefs.peerioContentConsented && (
-                                    <Button
-                                        icon={this.isExpanded ? 'arrow_drop_up' : 'arrow_drop_down'}
-                                        onClick={this.toggleExpand}
-                                        theme="no-hover"
-                                    />
-                                )}
-                                <FileActions
-                                    file={file}
-                                    onDelete={this.deleteFile}
-                                    onUnshare={this.unshareFile}
-                                    disableMove
-                                />
+                                <div className="file-name">{file.nameWithoutExtension}</div>
+                                <div className="file-ext">.{file.ext}</div>
                             </div>
-                            {!file.cachingFailed && file.downloading ? (
-                                <ProgressBar value={file.progress} max={file.progressMax} />
-                            ) : null}
+                            {file.isImage && uiStore.prefs.peerioContentConsented && (
+                                <Button
+                                    icon={this.isExpanded ? 'arrow_drop_up' : 'arrow_drop_down'}
+                                    onClick={this.toggleExpand}
+                                    theme="no-hover"
+                                />
+                            )}
+                            <FileActions
+                                file={file}
+                                onDelete={this.deleteFile}
+                                onUnshare={this.unshareFile}
+                                disableMove
+                            />
                         </div>
+                        {!file.cachingFailed && file.downloading ? (
+                            <ProgressBar value={file.progress} max={file.progressMax} />
+                        ) : null}
                     </div>
+
                     {this.isExpanded && uiStore.prefs.peerioContentConsented && (
                         <div
                             className={css('inline-files-expanded', {
@@ -371,10 +367,10 @@ class InlineFile extends React.Component<InlineFileProps> {
                     )}
                     {this.currentImageSrc && this.imagePopup}
                 </div>
-                <div>
-                    {!uiStore.prefs.peerioContentConsented && file.isImage && this.renderConsent()}
-                </div>
-                <div>
+
+                <>{!uiStore.prefs.peerioContentConsented && file.isImage && this.renderConsent()}</>
+
+                <>
                     {this.firstSave && (
                         <div className="update-settings">
                             <MaterialIcon icon="check_circle" />
@@ -383,7 +379,7 @@ class InlineFile extends React.Component<InlineFileProps> {
                             </T>
                         </div>
                     )}
-                </div>
+                </>
                 <ShareWithMultipleDialog ref={this.shareWithMultipleDialogRef} />
             </div>
         );

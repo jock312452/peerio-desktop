@@ -13,7 +13,12 @@ import T from '~/ui/shared-components/T';
 
 @observer
 export default class MessageSideBar extends React.Component {
-    readonly contactProfileRef = React.createRef<ContactProfile>();
+    @observable contactProfileActive = false;
+
+    @action.bound
+    closeContactProfile() {
+        this.contactProfileActive = false;
+    }
 
     @observable clickedContact: Contact;
 
@@ -40,7 +45,7 @@ export default class MessageSideBar extends React.Component {
         this.clickedContact = contactStore.getContact(
             ev.currentTarget.attributes['data-username'].value
         );
-        this.contactProfileRef.current!.openDialog();
+        this.contactProfileActive = true;
     }
 
     close() {
@@ -121,7 +126,11 @@ export default class MessageSideBar extends React.Component {
                     {this.getReceipts(msg)}
                 </List>
 
-                <ContactProfile ref={this.contactProfileRef} contact={this.clickedContact} />
+                <ContactProfile
+                    active={this.contactProfileActive}
+                    onCancel={this.closeContactProfile}
+                    contact={this.clickedContact}
+                />
             </div>
         );
     }

@@ -2,6 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 
 import { chatStore } from 'peerio-icebear';
+import { Contact, ChatPendingDM } from 'peerio-icebear/dist/models';
 
 import T from '~/ui/shared-components/T';
 import AvatarWithPopup from '~/ui/contact/components/AvatarWithPopup';
@@ -9,10 +10,17 @@ import EmojiImage from '~/ui/emoji/Image';
 import IdentityVerificationNotice from '~/ui/chat/components/IdentityVerificationNotice';
 
 @observer
-export default class PendingDMHeader extends React.Component {
+export default class PendingDMHeader extends React.Component<{
+    isNewUser?: boolean;
+    contact: Contact;
+}> {
     render() {
         const c = this.props.contact;
-        const chat = chatStore.activeChat;
+        const chat = chatStore.activeChat as ChatPendingDM;
+
+        // It should not be possible for `c.addresses[0]` to be null. Nonetheless
+        // we'll pass an empty string as backup to avoid screen-of-death.
+        const email = chat.email || c.addresses[0] || '';
 
         return (
             <div className="pending-dm-header">
@@ -39,7 +47,7 @@ export default class PendingDMHeader extends React.Component {
                         }
                         className="invite-type"
                     >
-                        {{ firstName: c.firstName, email: chat.email }}
+                        {{ firstName: c.firstName, email }}
                     </T>
                 )}
 

@@ -16,7 +16,7 @@ import uiStore from '~/stores/ui-store';
 import config from '~/config';
 
 import InlineFiles from './InlineFiles';
-import UrlPreview from './UrlPreview';
+import { UrlPreviewHtml, UrlPreviewImage } from './UrlPreview';
 import UrlPreviewConsent from './UrlPreviewConsent';
 import InlineSharedFolder from '../../files/components/InlineSharedFolder';
 import MessageText from './MessageText';
@@ -57,7 +57,12 @@ export default class Message extends React.Component<MessageProps> {
     @observable allowShowSendingState = false;
     @observable resendInProgress = false;
 
-    readonly contactProfileRef = React.createRef<ContactProfile>();
+    @observable contactProfileActive = false;
+
+    @action.bound
+    closeContactProfile() {
+        this.contactProfileActive = false;
+    }
 
     timer?: NodeJS.Timer;
 
@@ -78,7 +83,7 @@ export default class Message extends React.Component<MessageProps> {
         this.clickedContact = contactStore.getContact(
             ev.currentTarget.attributes['data-username'].value
         );
-        this.contactProfileRef.current!.openDialog();
+        this.contactProfileActive = true;
     }
 
     renderSystemData(m) {
@@ -238,16 +243,14 @@ export default class Message extends React.Component<MessageProps> {
                             {/* SECURITY: sanitize if you change this to  render in dangerouslySetInnerHTML */
                             this.renderSystemData(m)}
                             {m.externalWebsites.map((urlData, ind) => (
-                                <UrlPreview
-                                    type="html"
+                                <UrlPreviewHtml
                                     key={ind} // eslint-disable-line react/no-array-index-key
                                     urlData={urlData}
                                     onImageLoaded={this.props.onImageLoaded}
                                 />
                             ))}
                             {m.externalImages.map((urlData, ind) => (
-                                <UrlPreview
-                                    type="image"
+                                <UrlPreviewImage
                                     key={ind} // eslint-disable-line react/no-array-index-key
                                     urlData={urlData}
                                     onImageLoaded={this.props.onImageLoaded}
@@ -292,7 +295,11 @@ export default class Message extends React.Component<MessageProps> {
                     </div>
                 ) : null}
 
-                <ContactProfile ref={this.contactProfileRef} contact={this.clickedContact} />
+                <ContactProfile
+                    active={this.contactProfileActive}
+                    onCancel={this.closeContactProfile}
+                    contact={this.clickedContact}
+                />
             </div>
         );
     }

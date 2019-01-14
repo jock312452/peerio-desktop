@@ -29,7 +29,12 @@ export interface FolderLineProps {
 
 @observer
 export default class FolderLine extends React.Component<FolderLineProps> {
-    contactProfileRef = React.createRef<ContactProfile>();
+    @observable contactProfileActive = false;
+
+    @action.bound
+    closeContactProfile() {
+        this.contactProfileActive = false;
+    }
 
     @observable hovered;
 
@@ -66,7 +71,7 @@ export default class FolderLine extends React.Component<FolderLineProps> {
     @action.bound
     openContact(): void {
         this.clickedContact = contactStore.getContact(this.props.folder.owner);
-        this.contactProfileRef.current.openDialog();
+        this.contactProfileActive = true;
     }
 
     render() {
@@ -194,7 +199,11 @@ export default class FolderLine extends React.Component<FolderLineProps> {
                 {shareInProgress && <ProgressBar value={progress} max={progressMax} />}
 
                 {this.props.folderDetails && (
-                    <ContactProfile ref={this.contactProfileRef} contact={this.clickedContact} />
+                    <ContactProfile
+                        active={this.contactProfileActive}
+                        onCancel={this.closeContactProfile}
+                        contact={this.clickedContact}
+                    />
                 )}
             </div>
         );

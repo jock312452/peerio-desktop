@@ -40,6 +40,14 @@
     width: 100%;
     overflow: hidden;
 
+    label {
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
     + .new-chat-search {
       margin-top: 32px;
     }

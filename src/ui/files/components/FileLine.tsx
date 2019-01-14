@@ -40,7 +40,12 @@ export default class FileLine extends React.Component<FileLineProps> {
 
     @observable clickedContact; // TODO/TS: icebear contact
 
-    readonly contactProfileRef = React.createRef<ContactProfile>();
+    @observable contactProfileActive = false;
+
+    @action.bound
+    closeContactProfile() {
+        this.contactProfileActive = false;
+    }
 
     @action.bound
     onMenuClick() {
@@ -92,7 +97,7 @@ export default class FileLine extends React.Component<FileLineProps> {
     @action.bound
     openContact() {
         this.clickedContact = contactStore.getContact(this.props.file.fileOwner);
-        this.contactProfileRef.current.openDialog();
+        this.contactProfileActive = true;
     }
 
     static contextType = FileBeaconContext;
@@ -232,7 +237,11 @@ export default class FileLine extends React.Component<FileLineProps> {
                 ) : null}
 
                 {this.props.fileDetails && (
-                    <ContactProfile ref={this.contactProfileRef} contact={this.clickedContact} />
+                    <ContactProfile
+                        active={this.contactProfileActive}
+                        onCancel={this.closeContactProfile}
+                        contact={this.clickedContact}
+                    />
                 )}
             </div>
         );

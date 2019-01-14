@@ -1,5 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
+import { action, observable } from 'mobx';
 
 import { Avatar } from 'peer-ui';
 import ContactProfile from './ContactProfile';
@@ -12,22 +13,25 @@ interface AvatarWithPopupProps {
 
 @observer
 export default class AvatarWithPopup extends React.Component<AvatarWithPopupProps> {
-    dialogRef!: ContactProfile;
+    @observable contactProfileActive = false;
 
-    setDialogRef = (ref: ContactProfile | null) => {
-        if (ref) this.dialogRef = ref;
-    };
+    @action.bound
+    closeContactProfile() {
+        this.contactProfileActive = false;
+    }
 
-    openDialog = (ev: React.MouseEvent) => {
+    @action.bound
+    openContactProfile(ev: React.MouseEvent) {
         ev.stopPropagation();
-        this.dialogRef.openDialog();
-    };
+        this.contactProfileActive = true;
+    }
 
     render() {
         const popup = (
             <ContactProfile
                 key={`avatarwithpopup-dialog-${this.props.contact.username}`}
-                ref={this.setDialogRef}
+                active={this.contactProfileActive}
+                onCancel={this.closeContactProfile}
                 contact={this.props.contact}
             />
         );
@@ -38,7 +42,7 @@ export default class AvatarWithPopup extends React.Component<AvatarWithPopupProp
                 contact={this.props.contact}
                 size={this.props.size}
                 tooltip={this.props.tooltip}
-                onClick={this.openDialog}
+                onClick={this.openContactProfile}
             />
         );
 

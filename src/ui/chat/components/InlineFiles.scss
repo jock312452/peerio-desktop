@@ -1,8 +1,10 @@
-.inline-files-container {
+.inline-files-and-optional-message {
   .optional-message {
     margin-top: $margin-tiny;
   }
+}
 
+.inline-files-container {
   .inline-files {
     position: relative;
     min-width: 180px;

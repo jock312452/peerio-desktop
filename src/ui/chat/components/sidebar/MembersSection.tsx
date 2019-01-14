@@ -20,14 +20,19 @@ interface MembersSectionProps {
 
 @observer
 export default class MembersSection extends React.Component<MembersSectionProps> {
-    contactProfileRef = React.createRef<ContactProfile>();
-
     @observable.ref clickedContact: Contact | null = null;
 
+    @observable contactProfileActive = false;
+
     @action.bound
-    openContact(contact: Contact) {
+    closeContactProfile() {
+        this.contactProfileActive = false;
+    }
+
+    @action.bound
+    openContactProfile(contact: Contact) {
         this.clickedContact = contact;
-        this.contactProfileRef.current!.openDialog();
+        this.contactProfileActive = true;
     }
 
     render() {
@@ -70,7 +75,7 @@ export default class MembersSection extends React.Component<MembersSectionProps>
                                 contact={c}
                                 chat={chat}
                                 showAdmin={showAdmin}
-                                onClickContact={this.openContact}
+                                onClickContact={this.openContactProfile}
                             />
                         ))}
                         {invited && invited.length ? (
@@ -82,13 +87,17 @@ export default class MembersSection extends React.Component<MembersSectionProps>
                                       key={c.username}
                                       c={c}
                                       showAdmin={showAdmin}
-                                      onClickContact={this.openContact}
+                                      onClickContact={this.openContactProfile}
                                   />
                               ))
                             : null}
                     </List>
                 </div>
-                <ContactProfile ref={this.contactProfileRef} contact={this.clickedContact} />
+                <ContactProfile
+                    active={this.contactProfileActive}
+                    onCancel={this.closeContactProfile}
+                    contact={this.clickedContact}
+                />
             </SideBarSection>
         );
     }
