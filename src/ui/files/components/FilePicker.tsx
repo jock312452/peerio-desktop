@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import { observable, computed, when, IReactionDisposer } from 'mobx';
+import { observable, computed, reaction, when, IReactionDisposer } from 'mobx';
 
 import { fileStore, chatStore, t } from 'peerio-icebear';
 import { File, FileFolder } from 'peerio-icebear/dist/models';
@@ -32,20 +32,21 @@ export default class FilePicker extends React.Component<FilePickerProps> {
     container: HTMLElement | null = null;
 
     componentWillMount() {
-        this.setOpenedFolder = when(
+        this.setOpenedFolder = reaction(
             () => this.props.active,
-            () => {
-                this.previousOpenedFolder = fileStore.folderStore.currentFolder;
-                fileStore.folderStore.currentFolder = fileStore.folderStore.root;
+            active => {
+                if (active) {
+                    this.previousOpenedFolder = fileStore.folderStore.currentFolder;
+                    fileStore.folderStore.currentFolder = fileStore.folderStore.root;
+                } else {
+                    fileStore.folderStore.currentFolder = this.previousOpenedFolder;
+                }
             }
         );
     }
 
     componentWillUnmount() {
         this.setOpenedFolder();
-        if (this.previousOpenedFolder) {
-            fileStore.folderStore.currentFolder = this.previousOpenedFolder;
-        }
         fileStore.searchQuery = '';
     }
 
