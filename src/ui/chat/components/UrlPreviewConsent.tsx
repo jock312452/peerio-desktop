@@ -14,7 +14,14 @@ const DISABLED = 'disabled';
 
 @observer
 class UrlPreviewConsent extends React.Component {
+    /** User's selected setting, with default set to "all contacts" */
     @observable selectedMode = ALL_CONTACTS;
+
+    /**
+     * After submitting consent: is this the first time the user has saved
+     * this setting? If so, we display a prompt to user reminding them that
+     * they can change the setting at any time.
+     */
     @observable firstSave = false;
 
     radioOptions = [
@@ -23,7 +30,7 @@ class UrlPreviewConsent extends React.Component {
         { value: DISABLED, label: t('title_disable') }
     ];
 
-    onSelectedModeChange = value => {
+    onSelectedModeChange = (value: string) => {
         this.selectedMode = value;
     };
 

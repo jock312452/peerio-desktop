@@ -1,14 +1,25 @@
 /* eslint-disable react/no-danger */
 import React from 'react';
+import { IObservableArray } from 'mobx';
 import { observer } from 'mobx-react';
 
 import { fileHelpers, t } from 'peerio-icebear';
+import { File, FileFolder } from 'peerio-icebear/dist/models';
 import T from '~/ui/shared-components/T';
 import { Button, MaterialIcon, ProgressBar } from 'peer-ui';
 import FileSpriteIcon from '~/ui/shared-components/FileSpriteIcon';
 
 @observer
-class ShareToChatProgress extends React.Component {
+export default class ShareToChatProgress extends React.Component<{
+    /** Queue of individual files that are in line for upload */
+    uploadQueue: IObservableArray<File>;
+
+    /**
+     * Queue of in-app folders that are in line to be converted to shared folders
+     * and then shared with the current chat.
+     */
+    folderShareQueue: IObservableArray<FileFolder>;
+}> {
     // TODO: handle folder share cancel once available
     handleCancel(item) {
         if (confirm(t('title_confirmCancelUpload'))) {
@@ -79,19 +90,8 @@ class ShareToChatProgress extends React.Component {
                     </div>
                 </div>
 
-                {queued ? (
-                    <ProgressBar type="linear" mode="indeterminate" />
-                ) : (
-                    <ProgressBar
-                        type="linear"
-                        mode="determinate"
-                        value={progress || 0}
-                        max={progressMax}
-                    />
-                )}
+                {queued ? <ProgressBar /> : <ProgressBar value={progress || 0} max={progressMax} />}
             </div>
         );
     }
 }
-
-export default ShareToChatProgress;
