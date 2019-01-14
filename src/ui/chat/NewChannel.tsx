@@ -7,9 +7,17 @@ import T from '~/ui/shared-components/T';
 import { Input, ProgressBar } from 'peer-ui';
 
 @observer
-class NewChannel extends React.Component {
+export default class NewChannel extends React.Component {
+    /**
+     * UI "waiting" state after starting a new chat.
+     * Shows a loading spinner if true.
+     */
     @observable waiting = false;
+
+    /** The name that the Room will be given. */
     @observable channelName = '';
+
+    /** "Purpose" field of the new Room. */
     @observable purpose = '';
 
     // componentDidMount() {
@@ -44,11 +52,11 @@ class NewChannel extends React.Component {
         window.router.push('/app/chats/new-chat');
     }
 
-    handleNameChange = val => {
+    handleNameChange = (val: string) => {
         this.channelName = val;
     };
 
-    handlePurposeChange = val => {
+    handlePurposeChange = (val: string) => {
         this.purpose = val;
     };
 
@@ -60,7 +68,7 @@ class NewChannel extends React.Component {
 
     render() {
         const textParser = {
-            toCreateDM: text => (
+            toCreateDM: (text: string) => (
                 <a className="clickable" onClick={this.gotoNewChat}>
                     {text}
                 </a>
@@ -129,5 +137,3 @@ class NewChannel extends React.Component {
         );
     }
 }
-
-export default NewChannel;

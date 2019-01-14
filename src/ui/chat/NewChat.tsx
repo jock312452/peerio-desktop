@@ -8,14 +8,20 @@ import BackgroundIllustration from '~/ui/shared-components/BackgroundIllustratio
 import ELEMENTS from '~/whitelabel/helpers/elements';
 
 @observer
-class NewChat extends React.Component {
+export default class NewChat extends React.Component {
+    /**
+     * UI "waiting" state after starting a new chat.
+     * Shows a loading spinner if true.
+     */
     @observable waiting = false;
-    @observable picker;
 
     componentDidMount() {
         chatStore.deactivateCurrentChat();
     }
 
+    /**
+     * selected = the contact that the user has selected to start new DM with
+     */
     handleAccept = async selected => {
         this.waiting = true;
         if (!selected.length || selected.filter(c => c.notFound).length) {
@@ -67,5 +73,3 @@ class NewChat extends React.Component {
         );
     }
 }
-
-export default NewChat;

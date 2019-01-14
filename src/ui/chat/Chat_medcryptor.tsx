@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import ChatList from './components/ChatList';
 
 @observer
-class Chat extends React.Component {
+export default class Chat extends React.Component {
     render() {
         return (
             <div className="messages">
@@ -13,5 +13,3 @@ class Chat extends React.Component {
         );
     }
 }
-
-export default Chat;

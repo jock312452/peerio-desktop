@@ -13,18 +13,18 @@ import { getAttributeInParentChain } from '~/helpers/dom';
 import T from '~/ui/shared-components/T';
 
 @observer
-class PatientList extends React.Component {
+export default class PatientList extends React.Component {
     newPatient = () => {
         chatStore.deactivateCurrentChat();
         chatInviteStore.deactivateInvite();
         routerStore.navigateTo(routerStore.ROUTES.newPatient);
     };
 
-    activatePatient = ev => {
+    activatePatient = (ev: React.MouseEvent<HTMLLIElement>) => {
         chatStore.deactivateCurrentChat();
         chatInviteStore.deactivateInvite();
 
-        const spaceId = getAttributeInParentChain(ev.target, 'data-chatid');
+        const spaceId = getAttributeInParentChain(ev.target as Element, 'data-chatid');
         chatStore.spaces.activeSpaceId = spaceId;
         routerStore.navigateTo(routerStore.ROUTES.patients);
     };
@@ -78,5 +78,3 @@ class PatientList extends React.Component {
         );
     }
 }
-
-export default PatientList;
