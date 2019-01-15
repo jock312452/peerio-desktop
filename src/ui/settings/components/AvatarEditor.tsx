@@ -44,14 +44,14 @@ export default class AvatarEditor extends React.Component<AvatarEditorProps> {
         AvatarEditor.state.showEditor = false;
     };
 
-    static closeAndReturnBuffers = blobs => {
+    static closeAndReturnBuffers = (blobs): Promise<ArrayBuffer[]> => {
         AvatarEditor.close();
         return new Promise(resolve => {
-            const buffers = [];
+            const buffers: ArrayBuffer[] = [];
             let c = 0;
             const reader = new FileReader();
             reader.onload = function() {
-                buffers.push(reader.result);
+                buffers.push(reader.result as ArrayBuffer);
                 if (c === 1) {
                     resolve(buffers);
                     return;
