@@ -28,7 +28,6 @@ import Help from './settings/components/Help';
 import DevTools from './dev-tools/DevTools';
 import DTDashboard from './dev-tools/Dashboard';
 import KegEditor from './dev-tools/KegEditor';
-import NewDevice from './login/NewDevice';
 import AutoLogin from './login/AutoLogin';
 import Contacts from './contact/Contacts';
 import InvitedContacts from './contact/InvitedContacts';
@@ -42,7 +41,6 @@ export default (
         <Route path="/" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/new-user" component={NewUser} />
-        <Route path="/new-device" component={NewDevice} />
         <Route path="autologin" component={AutoLogin} />
         <Route path="/app" component={App}>
             <IndexRoute component={Loading} />
