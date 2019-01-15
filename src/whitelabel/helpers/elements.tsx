@@ -16,7 +16,7 @@ class ELEMENTS {
     }
 
     textParser = {
-        toCreateDM: text => {
+        toCreateDM: (text: string) => {
             return (
                 <a
                     className="clickable"
@@ -26,7 +26,7 @@ class ELEMENTS {
                 </a>
             );
         },
-        toCreateRoom: text => {
+        toCreateRoom: (text: string) => {
             return (
                 <a
                     className="clickable"
@@ -36,7 +36,7 @@ class ELEMENTS {
                 </a>
             );
         },
-        toCreatePatient: text => {
+        toCreatePatient: (text: string) => {
             return (
                 <a
                     className="clickable"
@@ -49,7 +49,12 @@ class ELEMENTS {
     };
 
     get newChannel() {
-        const obj = {
+        const obj: {
+            title: JSX.Element;
+            description: JSX.Element | JSX.Element[];
+            acceptFunction: string;
+            context?: 'newchat' | 'newpatientspace' | 'patientroom';
+        } = {
             title: <T k={STRINGS.newChannel.title} tag="span" />,
             description: [
                 <T key="new-channel-description" k={STRINGS.newChannel.description} />,

@@ -44,7 +44,7 @@ interface UserPickerProps {
     onClose?: () => void;
     onChange?: (contacts: Contact[]) => void;
     isDM?: boolean;
-    context?: 'newchat';
+    context?: 'newchat' | 'newpatientspace' | 'patientroom';
     sharing?: boolean;
     onlyPick?: boolean;
     closeable?: boolean;
