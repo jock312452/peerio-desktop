@@ -1,7 +1,7 @@
 import React from 'react';
 
 // @observer
-class PoweredBy extends React.Component {
+export default class PoweredBy extends React.PureComponent {
     render() {
         return (
             <img
@@ -12,5 +12,3 @@ class PoweredBy extends React.Component {
         );
     }
 }
-
-export default PoweredBy;

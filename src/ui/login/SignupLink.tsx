@@ -6,7 +6,7 @@ import { t } from 'peerio-icebear';
 import { observer } from 'mobx-react';
 
 @observer
-class SignupLink extends React.Component {
+export default class SignupLink extends React.Component {
     render() {
         return (
             <div className="signup-link">
@@ -18,5 +18,3 @@ class SignupLink extends React.Component {
         );
     }
 }
-
-export default SignupLink;
