@@ -18,11 +18,15 @@ import BetterInput from '~/ui/shared-components/BetterInput';
 @observer
 export default class SecuritySettings extends React.Component {
     @observable passphraseVisible = false;
-    @observable twoFASecret = null;
-    @observable twoFAQRCode = null;
+    @observable twoFASecret: string = null;
+    @observable twoFAQRCode: string = null;
     @observable qrCodeVisible = true; // when false - secret key is visible instead
     @observable totpCode = '';
+    @observable totpCodeError = false;
     @observable totpCodeValidating = false;
+    @observable backupCodes: string[];
+
+    /** Is the "help with auth apps" dialog visible */
     @observable authAppsDialogActive = false;
 
     componentWillMount() {
@@ -69,7 +73,7 @@ export default class SecuritySettings extends React.Component {
         }
     };
 
-    onToggleAutologin(ev) {
+    onToggleAutologin(ev: React.ChangeEvent<HTMLInputElement>) {
         ev.target.checked ? enableAutologin() : disableAutologin();
     }
 
@@ -78,7 +82,7 @@ export default class SecuritySettings extends React.Component {
         this.totpCodeError = false;
     };
 
-    onTOTPCodeChange = value => {
+    onTOTPCodeChange = (value: string) => {
         this.totpCode = value;
         this.totpCodeError = false;
         if (this.totpCode.replace(/\s+/g, '').length >= 6) {
