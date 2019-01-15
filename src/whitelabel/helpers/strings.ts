@@ -7,7 +7,23 @@ class STRINGS {
     }
 
     get newChannel() {
-        const obj = {
+        const obj: {
+            title:
+                | 'title_createChannel'
+                | 'mcr_title_newRoom'
+                | 'mcr_button_addPatient'
+                | 'mcr_title_newInternalRoom'
+                | 'mcr_title_newPatientRoom';
+            description:
+                | 'title_createChannelDetails'
+                | 'mcr_title_newInternalRoomDescription'
+                | 'mcr_title_newPatientRoomDescription';
+            offerDM: 'title_offerNewDM' | 'mcr_title_newPatientDescription';
+            channelName: 'title_channelName' | 'title_nameOfRoom';
+            channelPurpose: 'title_purpose';
+            purposeHelper: 'title_optional';
+            userPickerTitle: 'title_chatWith';
+        } = {
             title: 'title_createChannel',
             description: 'title_createChannelDetails',
             offerDM: 'title_offerNewDM',

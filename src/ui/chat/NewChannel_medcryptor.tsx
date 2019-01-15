@@ -15,10 +15,12 @@ import STRINGS from '~/whitelabel/helpers/strings';
 import routerStore from '~/stores/router-store';
 
 @observer
-class NewChannel extends React.Component {
+export default class NewChannel extends React.Component {
     @observable waiting = false;
     @observable channelName = '';
     @observable purpose = '';
+
+    userPickerRef = React.createRef<UserPicker>();
 
     handleAccept = () => {
         this.waiting = true;
@@ -40,7 +42,7 @@ class NewChannel extends React.Component {
 
     createNewChannel = async () => {
         const chat = await chatStore.startChat(
-            this.userPicker.selected,
+            this.userPickerRef.current.selected,
             true,
             this.channelName,
             this.purpose
@@ -59,7 +61,7 @@ class NewChannel extends React.Component {
             newSpaceProperties,
             t('mcr_title_consultation'),
             'patient',
-            this.userPicker.selected
+            this.userPickerRef.current.selected
         );
         const internalRoom = await chatStore.spaces.createRoomInSpace(
             newSpaceProperties,
@@ -100,7 +102,7 @@ class NewChannel extends React.Component {
             chatStore.spaces.currentSpace,
             this.channelName,
             type,
-            this.userPicker.selected
+            this.userPickerRef.current.selected
         );
         this.navigateWhenReady(chat, routerStore.ROUTES.patients);
     };
@@ -111,10 +113,6 @@ class NewChannel extends React.Component {
 
     handlePurposeChange = val => {
         this.purpose = val;
-    };
-
-    setUserPickerRef = ref => {
-        this.userPicker = ref;
     };
 
     render() {
@@ -163,7 +161,7 @@ class NewChannel extends React.Component {
                     )}
                     <div className="user-picker-container">
                         <UserPicker
-                            ref={this.setUserPickerRef}
+                            ref={this.userPickerRef}
                             title={t(STRINGS.newChannel.userPickerTitle)}
                             noHeader
                             onlyPick
@@ -178,5 +176,3 @@ class NewChannel extends React.Component {
         );
     }
 }
-
-export default NewChannel;
