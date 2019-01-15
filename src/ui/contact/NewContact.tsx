@@ -19,10 +19,25 @@ const urls = config.translator.urlMap;
 
 @observer
 export default class NewContact extends React.Component {
+    /** Search query for contacts */
     @observable query = '';
+
+    /** Flag to display certain bits of UI when search query results in user not found */
     @observable notFound = false;
+
+    /**
+     * If user searches by email and no match is found, we display a piece of UI
+     * suggesting that the user sends an invite to that email.
+     */
     @observable suggestInviteEmail = '';
+
+    /** Flag set to `true` while search is in progress; displays ProgressBar. */
     @observable waiting = false;
+
+    /**
+     * Same component is used for "add" and "invite" contact.
+     * When on invited zero state view, we want to render it slightly differently.
+     */
     @observable isInviteView = false;
     @observable beaconTimeout;
 
@@ -30,10 +45,6 @@ export default class NewContact extends React.Component {
     get showSearchError() {
         return this.notFound || !!this.suggestInviteEmail;
     }
-
-    // same component is used for add and invite,
-    // when on invited zero state view - we want to render it slightly different
-    isInviteView = false;
 
     componentWillMount() {
         this.isInviteView = routerStore.currentRoute === routerStore.ROUTES.newInvite;
@@ -72,7 +83,7 @@ export default class NewContact extends React.Component {
     };
 
     @action.bound
-    handleTextChange(newVal) {
+    handleTextChange(newVal: string) {
         this.notFound = false;
         this.query = newVal.toLocaleLowerCase().trim();
 
@@ -110,8 +121,8 @@ export default class NewContact extends React.Component {
         this.waiting = false;
     };
 
-    invite = context => {
-        contactStore.invite(this.isInviteView ? this.query : this.suggestInviteEmail, context);
+    invite = () => {
+        contactStore.invite(this.isInviteView ? this.query : this.suggestInviteEmail);
         this.suggestInviteEmail = '';
         this.notFound = false;
         if (this.isInviteView) this.query = '';
@@ -200,7 +211,7 @@ export default class NewContact extends React.Component {
                                         onClick={this.isInviteView ? this.invite : this.tryAdd}
                                         theme="affirmative"
                                     />
-                                    {this.waiting && <ProgressBar circular theme="small" />}
+                                    {this.waiting && <ProgressBar circular size="small" />}
                                 </div>
                             </Beacon>
                             {this.showSearchError ? (
