@@ -68,7 +68,7 @@ export default class NewContact extends React.Component {
     }
 
     // Don't use onKeyUp - text change fires earlier
-    handleKeyDown = async e => {
+    handleKeyDown = async (e: React.KeyboardEvent) => {
         if (e.key === 'Enter' && this.query !== '') {
             if (this.isInviteView) this.invite();
             else this.tryAdd();
