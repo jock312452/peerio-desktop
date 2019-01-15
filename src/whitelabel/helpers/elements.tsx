@@ -6,6 +6,7 @@
 import React from 'react';
 import config from '~/config';
 import { contactStore, chatStore, User } from 'peerio-icebear';
+import { Chat } from 'peerio-icebear/dist/models';
 import routerStore from '~/stores/router-store';
 import T from '~/ui/shared-components/T';
 import STRINGS from './strings';
@@ -55,7 +56,11 @@ class ELEMENTS {
             acceptFunction: string;
             context?: 'newchat' | 'newpatientspace' | 'patientroom';
         } = {
-            title: <T k={STRINGS.newChannel.title} tag="span" />,
+            title: (
+                <T k={STRINGS.newChannel.title} tag="span">
+                    {{ patientName: chatStore.spaces.currentSpaceName }}
+                </T>
+            ),
             description: [
                 <T key="new-channel-description" k={STRINGS.newChannel.description} />,
                 <T key="new-channel-offer-dm" k={STRINGS.newChannel.offerDM}>
@@ -123,10 +128,10 @@ class ELEMENTS {
 
     get chatEditor() {
         const page = {
-            displayName: chat => {
+            displayName: (chat: Chat) => {
                 return chat.name;
             },
-            saveNameChanges: val => {
+            saveNameChanges: (val: string): Promise<void | [void, void]> => {
                 if (!chatStore.activeChat) return Promise.resolve();
                 return chatStore.activeChat.rename(val);
             }
@@ -134,11 +139,11 @@ class ELEMENTS {
 
         if (config.whiteLabel.name === 'medcryptor') {
             if (chatStore.activeChat.isInSpace && User.current.isMCAdmin) {
-                page.displayName = chat => {
+                page.displayName = (chat: Chat) => {
                     return chat.nameInSpace;
                 };
 
-                page.saveNameChanges = async val => {
+                page.saveNameChanges = async (val: string) => {
                     if (!chatStore.activeChat) return Promise.resolve();
                     return Promise.all([
                         chatStore.activeChat.renameInSpace(val),

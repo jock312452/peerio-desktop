@@ -58,7 +58,9 @@ class STRINGS {
     }
 
     get newChat() {
-        const obj = {
+        const obj: {
+            offerRoom: 'title_offerNewRoom' | 'mcr_title_offerNewRoom';
+        } = {
             offerRoom: 'title_offerNewRoom'
         };
 
