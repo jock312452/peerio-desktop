@@ -6,7 +6,7 @@ import T from '~/ui/shared-components/T';
 import PlusIcon from '~/ui/shared-components/PlusIcon';
 
 @observer
-class PatientZeroChats extends React.Component {
+export default class PatientZeroChats extends React.Component {
     render() {
         return (
             <div className="patient-zero-chats">
@@ -34,5 +34,3 @@ class PatientZeroChats extends React.Component {
         );
     }
 }
-
-export default PatientZeroChats;
