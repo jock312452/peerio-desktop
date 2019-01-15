@@ -59,19 +59,13 @@ export default class PatientSidebar extends React.Component {
     activateChat = async (ev: React.MouseEvent) => {
         chatInviteStore.deactivateInvite();
         const id = getAttributeInParentChain(ev.currentTarget, 'data-chatid');
-        // FIXME: please please do not attach arbitrary properties on models!
-        // it's confusing, hard to reason about, breaks tooling, potentially
-        // will stomp fields added to the class later, and generally is going to
-        // break something and make someone very sad later. it might even be
-        // you.
-        (chatStore.chats.find(x => x.id === id) as any).isNew = false;
+        chatStore.chats.find(x => x.id === id).isNew = false;
         chatStore.activate(id);
         routerStore.navigateTo(routerStore.ROUTES.patients);
     };
 
     calculateRightContent = (r: Chat) => {
-        // FIXME: don't attach arbitrary properties on models! see above.
-        if ((r as any).isNew) {
+        if (r.isNew) {
             return <T k="title_new" className="badge-new" />;
         } else if ((!r.active || r.newMessagesMarkerPos) && r.unreadCount > 0) {
             return (
