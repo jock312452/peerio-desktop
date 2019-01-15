@@ -39,7 +39,6 @@ export default class NewContact extends React.Component {
      * When on invited zero state view, we want to render it slightly differently.
      */
     @observable isInviteView = false;
-    @observable beaconTimeout;
 
     @computed
     get showSearchError() {
@@ -60,16 +59,10 @@ export default class NewContact extends React.Component {
     }
 
     componentWillUpdate() {
-        if (this.beaconTimeout) {
-            clearTimeout(this.beaconTimeout);
-        }
-
         this.isInviteView = routerStore.currentRoute === routerStore.ROUTES.newInvite;
     }
 
     componentWillUnmount() {
-        clearTimeout(this.beaconTimeout);
-        this.beaconTimeout = null;
         beaconStore.clearBeacons();
         beaconStore.clearIncrementQueue();
     }
