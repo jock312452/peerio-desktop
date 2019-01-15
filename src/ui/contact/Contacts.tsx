@@ -10,7 +10,7 @@ import routerStore from '~/stores/router-store';
 import PlusIcon from '~/ui/shared-components/PlusIcon';
 
 @observer
-class Contacts extends React.Component {
+export default class Contacts extends React.Component {
     @action
     toAddNew() {
         routerStore.navigateTo(routerStore.ROUTES.newContact);
@@ -84,5 +84,3 @@ class Contacts extends React.Component {
         );
     }
 }
-
-export default Contacts;
