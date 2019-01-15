@@ -4,6 +4,6 @@ import React from 'react';
 // no @observer
 export default class SignupLink extends React.PureComponent {
     render() {
-        return <div />;
+        return null;
     }
 }
