@@ -7,7 +7,7 @@ import { getAttributeInParentChain } from '~/helpers/dom';
 import routerStore from '~/stores/router-store';
 
 @observer
-class ContactList extends React.Component {
+export default class ContactList extends React.Component {
     sortOptions = [
         { value: 'firstName', label: t('title_firstName') },
         { value: 'lastName', label: t('title_lastName') },
@@ -135,5 +135,3 @@ class ContactList extends React.Component {
         );
     }
 }
-
-export default ContactList;
