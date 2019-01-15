@@ -2,12 +2,13 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import { Button, List, ListItem } from 'peer-ui';
 import { contactStore, t } from 'peerio-icebear';
+import { InvitedContact } from 'peerio-icebear/dist/defs/interfaces';
 import moment from 'moment';
 import { getAttributeInParentChain } from '~/helpers/dom';
 import routerStore from '~/stores/router-store';
 
 @observer
-class InvitedContacts extends React.Component {
+export default class InvitedContacts extends React.Component {
     componentWillMount() {
         this.rerouteIfZero();
     }
@@ -21,15 +22,15 @@ class InvitedContacts extends React.Component {
         routerStore.navigateTo(routerStore.ROUTES.newInvite);
     };
 
-    removeInvite(ev) {
-        const email = getAttributeInParentChain(ev.target, 'data-id');
+    removeInvite(ev: React.MouseEvent<HTMLButtonElement>) {
+        const email = getAttributeInParentChain(ev.target as HTMLElement, 'data-id');
         contactStore.removeInvite(email);
     }
-    resendInvite(ev) {
-        const email = getAttributeInParentChain(ev.target, 'data-id');
+    resendInvite(ev: React.MouseEvent<HTMLButtonElement>) {
+        const email = getAttributeInParentChain(ev.target as HTMLElement, 'data-id');
         contactStore.invite(email);
     }
-    contactActions(c) {
+    contactActions(c: InvitedContact) {
         return (
             <div data-id={c.email}>
                 <Button
@@ -77,5 +78,3 @@ class InvitedContacts extends React.Component {
         );
     }
 }
-
-export default InvitedContacts;
