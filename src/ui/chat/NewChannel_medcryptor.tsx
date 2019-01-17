@@ -16,7 +16,12 @@ import routerStore from '~/stores/router-store';
 
 @observer
 export default class NewChannel extends React.Component {
+    /**
+     * UI "waiting" state after starting a new chat.
+     * Shows a loading spinner if true.
+     */
     @observable waiting = false;
+
     @observable channelName = '';
     @observable purpose = '';
 
